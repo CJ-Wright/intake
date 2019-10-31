@@ -184,6 +184,16 @@ class Catalog(DataSource):
 
     @reload_on_change
     def search(self, text, depth=2):
+        """Search the entry metadata
+        
+        Parameters
+        ----------
+        key : str
+            Perform a text search for that string in any of the metadata values.
+            If multiple words are provided (seperated by a space) then return
+            an entry if any of those words appear in the entry metadata.
+        """
+
         import copy
         words = text.lower().split()
         entries = {k: copy.copy(v)for k, v in self.walk(depth=depth).items()
